@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Claude AI Chat</h2>
+  <input type="text" id="userInput" placeholder="Ask something...">
+  <button onclick="askClaude()">Send</button>
+  <p id="response"></p>
+
+  <script>
+    async function askClaude() {
+      const input = document.getElementById('userInput').value;
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: input })
+      });
+      const data = await res.json();
+      document.getElementById('response').innerText = data.reply;
+    }
+  </script>
+</body>
+</html>
